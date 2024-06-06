@@ -5,26 +5,14 @@ const DataState = ({ children }) => {
   const [isLoading, setLoading] = useState(true);
   const [contacts, setContacts] = useState([]);
 
-  const handleDelete = (id) => {
-    console.log("id : ", id);
-    const newContacts = contacts.filter((contact) => contact.id !== id);
-    console.log("newContacts : ", newContacts);
-    setContacts(newContacts);
-
-    fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("DELETE REQUEST  : ", data);
-      });
-  };
-
+  //add contact
   const handleAdd = (newContact) => {
     //add id in newContact
-    newContact.id = contacts.length + 1;
+    newContact = {...newContact, id: contacts.length + 1}
     const newContacts = [...contacts, newContact];
     setContacts(newContacts);
+    // console.log("Data after Add :: ", newContacts);
+
     fetch("https://jsonplaceholder.typicode.com/users", {
       method: "POST",
       body: JSON.stringify(newContact),
@@ -39,7 +27,6 @@ const DataState = ({ children }) => {
   };
 
   //update contact
-
   const handleUpdate = (id, updatedContact) => {
     const newContacts = contacts.map((contact) =>
       contact.id === id ? updatedContact : contact
@@ -48,7 +35,7 @@ const DataState = ({ children }) => {
 
     fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
       method: "PUT",
-        body: JSON.stringify({updatedContact}),
+      body: JSON.stringify( updatedContact ),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
@@ -59,6 +46,22 @@ const DataState = ({ children }) => {
       });
   };
 
+  //   Delete Contact
+  const handleDelete = (id) => {
+    const newContacts = contacts.filter((contact,index) => index !== id);
+    setContacts(newContacts);
+    // console.log("Data after Delete :: ", newContacts);
+
+    fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("DELETE REQUEST  : ", data);
+      });
+  };
+
+  //fetch data from API and set it to contacts state
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())

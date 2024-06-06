@@ -2,24 +2,28 @@ import { useContext, useState } from "react";
 import dataContext from "../Context/dataContext";
 import UpdateContact from "./updateContact";
 
-export default function Contact(props) {
-  const { contacts } = props;
-  const { handleDelete } = useContext(dataContext);
+export default function Contact() {
+  const { contacts, handleDelete } = useContext(dataContext);
 
   const [isEdit, setEditToggle] = useState(false);
   const [updateContact, setUpdateContact] = useState({});
-  console.log("updateContact : ", updateContact);
 
   const handleEdit = (contact) => {
     setEditToggle(true);
     setUpdateContact(contact);
-  }
+  };
 
   return (
     <div className="relative flex flex-col w-full  justify-center items-center text-center">
       <h1 className="text-3xl font-bold m-2">Contact</h1>
 
-      {isEdit && <UpdateContact  setEditToggle={setEditToggle} updateContact={updateContact} setUpdateContact={setUpdateContact} />}
+      {isEdit && (
+        <UpdateContact
+          setEditToggle={setEditToggle}
+          updateContact={updateContact}
+          setUpdateContact={setUpdateContact}
+        />
+      )}
 
       <div className="flex flex-col bg-gray-100 w-5/6 ">
         <ul className="space-y-4">
@@ -41,11 +45,14 @@ export default function Contact(props) {
                     <h1>Company : {contact.company.name}</h1>
                   </div>
                   <div className="space-x-2 m-2">
-                    <button onClick={() => handleEdit(contact) } className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button
+                      onClick={() => handleEdit(contact)}
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
                       Edit
                     </button>
                     <button
-                      onClick={() => handleDelete(contact.id)}
+                      onClick={() => handleDelete(index)}
                       className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                     >
                       Delete

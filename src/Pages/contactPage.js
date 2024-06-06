@@ -4,7 +4,7 @@ import { useContext } from "react";
 import dataContext from "../Context/dataContext";
 
 export default function ContactPage() {
-  const { isLoading, contacts } = useContext(dataContext);
+  const { isLoading } = useContext(dataContext);
 
-  return <>{isLoading ? <Loader /> : <Contact contacts={contacts} />}</>;
+  return <>{isLoading ? <Loader /> : <Contact />}</>;
 }

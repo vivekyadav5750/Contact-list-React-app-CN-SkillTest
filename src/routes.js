@@ -10,7 +10,6 @@ export default createBrowserRouter([
         children: [
             {
                 index: true,
-                // path: "/",
                 element: <ContactPage/>
             },
             {
