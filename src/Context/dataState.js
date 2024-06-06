@@ -27,9 +27,10 @@ const DataState = ({ children }) => {
   };
 
   //update contact
-  const handleUpdate = (id, updatedContact) => {
-    const newContacts = contacts.map((contact) =>
-      contact.id === id ? updatedContact : contact
+  const handleUpdate = (idx, updatedContact) => {
+    const id = updatedContact.id;
+    const newContacts = contacts.map((contact,index) =>
+      index === idx ? updatedContact : contact
     );
     setContacts(newContacts);
 

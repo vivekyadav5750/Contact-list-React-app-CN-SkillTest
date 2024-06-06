@@ -7,10 +7,12 @@ export default function Contact() {
 
   const [isEdit, setEditToggle] = useState(false);
   const [updateContact, setUpdateContact] = useState({});
+  const [index, setIndex] = useState(null);
 
-  const handleEdit = (contact) => {
+  const handleEdit = (contact,index) => {
     setEditToggle(true);
     setUpdateContact(contact);
+    setIndex(index);
   };
 
   return (
@@ -22,6 +24,7 @@ export default function Contact() {
           setEditToggle={setEditToggle}
           updateContact={updateContact}
           setUpdateContact={setUpdateContact}
+          index={index}
         />
       )}
 
@@ -46,7 +49,7 @@ export default function Contact() {
                   </div>
                   <div className="space-x-2 m-2">
                     <button
-                      onClick={() => handleEdit(contact)}
+                      onClick={() => handleEdit(contact,index)}
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       Edit

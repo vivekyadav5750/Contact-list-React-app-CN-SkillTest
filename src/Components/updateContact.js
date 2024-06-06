@@ -3,7 +3,7 @@ import dataContext from "../Context/dataContext";
 
 export default function UpdateContact(props) {
 
-    const { setEditToggle, updateContact, setUpdateContact } = props;
+    const { setEditToggle, updateContact, setUpdateContact, index } = props;
     const { handleUpdate } = useContext(dataContext);
 
     const handleEditSubmit = (id) => {
@@ -28,7 +28,7 @@ export default function UpdateContact(props) {
         };
         console.log("updatedContactData : ", updatedContactData);
         //call handleUpdate function
-        handleUpdate(id, updatedContactData);
+        handleUpdate(index, updatedContactData);
         //close the form
         setEditToggle(false);
         setUpdateContact({});
